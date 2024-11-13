@@ -2,8 +2,18 @@ const express = require("express");
 
 const app = express();
 
-app.use("/", (req, res) => {
-  res.send("Hello from the server nodemon2");
+// This will only handle GET call to /user
+app.get("/user", (req, res) => {
+  res.send({ firstName: "Raju", lastName: "E" });
+});
+
+app.post("/user", (req, res) => {
+  // saving data to DB
+  res.send("Data saved in the database successfully");
+});
+
+app.delete("/user", (req, res) => {
+  res.send("User deleted successfully");
 });
 
 app.use("/test", (req, res) => {
