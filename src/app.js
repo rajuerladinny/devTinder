@@ -2,31 +2,25 @@ const express = require("express");
 
 const app = express();
 
-app.use("/user", [
-  (req, res, next) => {
-    console.log("user response");
-    next();
-  },
-  (req, res, next) => {
-    console.log("User response 2");
-    //res.send("successfully sent response 2");
-    next();
-  },
-  (req, res, next) => {
-    console.log("User response 3");
-    //res.send("successfully sent response 3");
-    next();
-  },
-  (req, res, next) => {
-    console.log("User response 4");
-    //res.send("successfully sent response 4");
-    next();
-  },
-  (req, res) => {
-    console.log("User response 5");
-    res.send("successfully sent response 5");
-  },
-]);
+const { adminAuth, userAuth } = require("./middlewares/auth");
+
+app.use("/admin", adminAuth);
+
+app.post("/user/login", (req, res) => {
+  res.send("User logged in successfully");
+});
+
+app.get("/user", userAuth, (req, res) => {
+  res.send("user sent data");
+});
+
+app.get("/admin/getAllData", (req, res) => {
+  res.send("sent all data");
+});
+
+app.get("/admin/deleteUser", (req, res) => {
+  res.send("Deleted user");
+});
 
 app.listen(3000, () => {
   console.log("Server is listening to the port 3000 successfully");
