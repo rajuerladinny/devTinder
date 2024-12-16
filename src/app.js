@@ -22,6 +22,16 @@ app.get("/admin/deleteUser", (req, res) => {
   res.send("Deleted user");
 });
 
+//Error Handling
+app.get("/getUserData", (req, res) => {
+  try {
+    throw new Error("dgdgsgasd");
+    res.send("sent user data");
+  } catch (err) {
+    res.status(500).send("Something went wrong");
+  }
+});
+
 app.listen(3000, () => {
   console.log("Server is listening to the port 3000 successfully");
 });
